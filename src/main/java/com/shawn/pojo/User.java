@@ -3,9 +3,7 @@ package com.shawn.pojo;
 public class User {
 
     private String name;
-
     private Integer age;
-
     private Address address;
 
     public String getName() {
