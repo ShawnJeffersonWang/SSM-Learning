@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +20,9 @@ class SpringbootMybatisQuickstartApplicationTests {
     @Test
     public void testListUser() {
         List<User> userList = userMapper.list();
-        userList.stream().forEach(user -> System.out.println(user));
+        userList.stream().forEach(user -> {
+            System.out.println(user);
+        });
     }
 
     /*
@@ -89,5 +88,25 @@ class SpringbootMybatisQuickstartApplicationTests {
     mybatis如何解决：application.properties所有的配置项前缀都是spring.datasource
     当我们按照这种方式配置数据库连接信息之后，spring底层会自动采用数据库连接池技术统一管理和分配连接，
     这个连接就是Connection对象
+
+    数据库连接池
+    数据库连接池是个容器，负责分配，管理数据库连接(Connection)
+    他允许应用程序重复使用一个现有的数据库连接，而不是重新建立一个
+    释放空闲时间超过最大空闲时间的连接，来避免因为没有释放连接而引起的数据库连接遗漏
+
+    优势：
+    1. 资源重用
+    2. 提升系统响应速度
+    3. 避免数据库连接遗漏
+
+    *标准接口DataSource*
+    所有的数据库连接池都需要实现这个标准接口，并且需要实现核心方法
+    Connection getConnection() throws SQLException;
+    Druid和Hikari现在用的比较多
+    spring自带连接池Hikari
+
+    Druid(德鲁伊)
+    Druid连接池是阿里巴巴开源的数据库连接池项目
+    功能强大，性能优秀，是Java语言最好的数据库连接池之一
      */
 }
