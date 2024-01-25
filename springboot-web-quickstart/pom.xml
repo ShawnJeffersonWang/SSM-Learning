@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.1</version>
+		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.shawn</groupId>
-	<artifactId>SSM-Learning</artifactId>
+	<artifactId>springboot-web-quickstart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SSM-Learning</name>
+	<name>springboot-web-quickstart</name>
 	<description>SSM-Learning</description>
 	<properties>
 		<java.version>21</java.version>
