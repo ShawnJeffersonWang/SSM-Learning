@@ -3,13 +3,10 @@ package com.shawn.controller;
 // Controller不负责逻辑处理
 // Controller只负责接受请求，响应数据
 
-import com.shawn.pojo.Emp;
+import com.shawn.pojo.Employee;
 import com.shawn.pojo.Result;
 import com.shawn.service.EmpService;
-import com.shawn.service.impl.EmpServiceA;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +32,7 @@ public class EmpController {
     // 调用Service获取数据
     @RequestMapping("/listEmp")
     public Result list() {
-        List<Emp> empList = empService.listEmp();
+        List<Employee> empList = empService.listEmp();
         return Result.success(empList);
     }
 }

@@ -1,16 +1,16 @@
 package com.shawn.pojo;
 
-public class Emp {
+public class Employee {
     private String name;
     private Integer age;
     private String image;
     private String gender;
     private String job;
 
-    public Emp() {
+    public Employee() {
     }
 
-    public Emp(String name, Integer age, String image, String gender, String job) {
+    public Employee(String name, Integer age, String image, String gender, String job) {
         this.name = name;
         this.age = age;
         this.image = image;

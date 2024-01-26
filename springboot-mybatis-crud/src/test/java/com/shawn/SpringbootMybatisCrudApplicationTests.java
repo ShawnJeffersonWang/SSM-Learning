@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -60,7 +61,21 @@ class SpringbootMybatisCrudApplicationTests {
         emp.setDeptId(1);
 
         // 执行更新员工操作
-        empMapper.update(emp);
+//        empMapper.update(emp);
+    }
+
+    @Test
+    public void testUpdate2(){
+        // 构造员工对象
+        Emp emp = new Emp();
+        emp.setId(18);
+        emp.setUsername("Tom222333");
+//        emp.setName("Tom222");
+//        emp.setGender((short) 1);
+//        emp.setUpdateTime(LocalDateTime.now());
+
+        // 执行更新员工操作
+        empMapper.update2(emp);
     }
 
     @Test
@@ -69,11 +84,29 @@ class SpringbootMybatisCrudApplicationTests {
         System.out.println(emp);
     }
 
+    /*
+    动态SQL：随着用户的输入或外部条件的变化而变化的SQL语句，我们称为动态SQL
+     */
     // 根据条件查询员工
     @Test
     public void testList() {
         List<Emp> empList = empMapper.list("张", (short) 1, LocalDate.of(2010, 1, 1),
                 LocalDate.of(2020, 1, 1));
-        System.out.println(empList);
+        List<Emp> empList1 = empMapper.list("张", null, null, null);
+        List<Emp> empList2 = empMapper.list("张", (short) 1, null, null);
+        List<Emp> empList3 = empMapper.list(null, (short) 1, null, null);
+        List<Emp> empList4 = empMapper.list(null, null, null, null);
+//        System.out.println(empList);
+//        System.out.println(empList1);
+//        System.out.println(empList2);
+//        System.out.println(empList3);
+        System.out.println(empList4);
+    }
+
+    // 批量删除员工
+    @Test
+    public void testDeletedByIds(){
+        List<Integer> ids= Arrays.asList(13,14,15);
+        empMapper.deleteByIds(ids);
     }
 }

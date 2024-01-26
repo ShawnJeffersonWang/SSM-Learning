@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shawn.mapper.EmpMapper">
+
+    <!--定义可重用的SQL片段-->
+    <sql id="commonSelect">
+        select id,
+               username,
+               password,
+               name,
+               gender,
+               image,
+               job,
+               entrydate,
+               dept_id,
+               create_time,
+               update_time
+        from emp
+    </sql>
+
+    <!--动态更新员工-->
+    <update id="update2">
+        update emp
+        <!--替换set关键字，去除字段后多余的','-->
+            <!--<set>：动态的在行首插入SET关键字，并会删除多余的逗号，用在update语句中-->
+        <set>
+            <if test="username != null">
+                username=#{username},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="gender != null">
+                gender=#{gender},
+            </if>
+            <if test="image != null">
+                image=#{image},
+            </if>
+            <if test="job != null">
+                job=#{job},
+            </if>
+            <if test="entrydate != null">
+                entrydate=#{entrydate},
+            </if>
+            <if test="deptId != null">
+                dept_id=#{deptId},
+            </if>
+            <if test="updateTime != null">
+                update_time=#{updateTime}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--    动态SQL：随着用户的输入或外部条件的变化而变化的SQL语句，我们称为动态SQL-->
+    <!--<if>:用于判断条件是否成立，使用test属性进行条件判断，如果条件为true，则拼接SQL-->
+    <!--resultType：单条记录所封装的类型-->
+    <!--将where关键字换成<where>标签，1. 动态生成where关键字, 2. 自动取出多余的and, or-->
+    <select id="list" resultType="com.shawn.pojo.Emp">
+        <!--自闭和-->
+        <!--<include>：通过属性refid,指定包含的sql片段-->
+        <include refid="commonSelect"/>
+        <where>
+            <if test="name != null">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+
+    <!--批量删除员工-->
+    <!--
+        collection: 遍历的集合
+        item: 遍历出来的元素
+        separator: 分隔符
+        open: 遍历开始前拼接的SQL片段
+        close: 遍历结束后拼接的SQL片段
+    -->
+    <delete id="deleteByIds">
+        delete from emp where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
+        <!--规范-->
+        <!--XML映射文件的名称与Mapper接口名称一致，并且将XML映射文件和Mapper接口放置在相同包下（同包同名）。-->
+        <!--XML映射文件的namespace属性为Mapper接口全限定名一致-->
+        <!--XML映射文件中sql语句的id与Mapper接口中的方法名一致，并保持返回类型一致-->

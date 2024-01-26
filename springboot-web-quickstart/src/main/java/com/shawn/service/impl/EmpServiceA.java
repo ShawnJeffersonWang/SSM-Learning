@@ -1,11 +1,9 @@
 package com.shawn.service.impl;
 
 import com.shawn.dao.EmpDao;
-import com.shawn.dao.impl.EmpDaoA;
-import com.shawn.pojo.Emp;
+import com.shawn.pojo.Employee;
 import com.shawn.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,9 +32,9 @@ public class EmpServiceA implements EmpService {
     Service要想调用DAO，就需要创建DAO层的对象
      */
     @Override
-    public List<Emp> listEmp() {
+    public List<Employee> listEmp() {
         // 1. 调用dao，处理数据
-        List<Emp> empList = empDao.listEmp();
+        List<Employee> empList = empDao.listEmp();
 
         // 2. 对数据进行转换处理-gender，job
         empList.stream().forEach(emp -> {

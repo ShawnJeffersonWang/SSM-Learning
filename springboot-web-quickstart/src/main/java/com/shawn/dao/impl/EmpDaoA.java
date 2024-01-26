@@ -1,9 +1,8 @@
 package com.shawn.dao.impl;
 
 import com.shawn.dao.EmpDao;
-import com.shawn.pojo.Emp;
+import com.shawn.pojo.Employee;
 import com.shawn.utils.XmlParserUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,10 +17,10 @@ import java.util.List;
 public class EmpDaoA implements EmpDao {
 
     @Override
-    public List<Emp> listEmp() {
+    public List<Employee> listEmp() {
         String file = this.getClass().getClassLoader().getResource("emp.xml").getFile();
         System.out.println(file);
-        List<Emp> empList = XmlParserUtils.parse(file, Emp.class);
+        List<Employee> empList = XmlParserUtils.parse(file, Employee.class);
         return empList;
     }
 }

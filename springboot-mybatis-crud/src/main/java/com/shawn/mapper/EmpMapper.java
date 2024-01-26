@@ -39,9 +39,9 @@ public interface EmpMapper {
     public void insert(Emp emp);
 
     // 更新员工
-    @Update("update emp set username=#{username},name=#{name},gender=#{gender},image=#{image}," +
-            " job=#{job},entrydate=#{entrydate},dept_id=#{deptId},update_time=#{updateTime} where id=#{id}")
-    public void update(Emp emp);
+//    @Update("update emp set username=#{username},name=#{name},gender=#{gender},image=#{image}," +
+//            " job=#{job},entrydate=#{entrydate},dept_id=#{deptId},update_time=#{updateTime} where id=#{id}")
+//    public void update(Emp emp);
 
     // 方案三：开启mybatis的驼峰命名自动映射开关 --- a_column -----> aColumn
     // 根据ID查询员工
@@ -63,12 +63,28 @@ public interface EmpMapper {
 //    public Emp getById(Integer id);
 
     // 条件查询员工
+    // 方式一
     // 性能低，不安全，存在SQL注入问题
 //    @Select("select * from emp where name like '%${name}%' and gender=#{gender} and " +
 //            "entrydate between #{begin} and #{end} order by update_time desc ")
 //    public List<Emp> list(String name, Short gender, LocalDate begin,LocalDate end);
 
-    @Select("select * from emp where name like concat('%',#{name},'%') and gender=#{gender} and " +
-            "entrydate between #{begin} and #{end} order by update_time desc ")
+    // 方式二
+//    @Select("select * from emp where name like concat('%',#{name},'%') and gender=#{gender} and " +
+//            "entrydate between #{begin} and #{end} order by update_time desc ")
+//    public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+
+    /*
+    使用Mybatis的注解，主要是来完成一些简单的增删改查功能。如果需要实现复杂的SQL功能，建议使用XML来配置映射语句
+     */
+    // 动态条件查询
+    // <if>: 用于判断条件是否成立。使用test属性进行条件判断，如果条件为true，则拼接SQL
+    // <where>: where元素只会在子元素有内容的情况下才插入where子句。而且会自动去除子句的开头的AND或OR
     public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+
+    // 动态更新员工
+    void update2(Emp emp);
+
+    // 批量删除
+    void deleteByIds(List<Integer> ids);
 }

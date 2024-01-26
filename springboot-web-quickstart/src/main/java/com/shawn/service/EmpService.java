@@ -1,11 +1,11 @@
 package com.shawn.service;
 
-import com.shawn.pojo.Emp;
+import com.shawn.pojo.Employee;
 
 import java.util.List;
 
 // 业务逻辑处理
 public interface EmpService {
 
-    public List<Emp> listEmp();
+    public List<Employee> listEmp();
 }
