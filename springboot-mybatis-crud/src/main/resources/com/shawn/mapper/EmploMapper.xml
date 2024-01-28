@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shawn.mapper.EmpMapper">
+<mapper namespace="com.shawn.mapper.EmploMapper">
 
     <!--定义可重用的SQL片段-->
     <sql id="commonSelect">
@@ -58,7 +58,7 @@
     <!--<if>:用于判断条件是否成立，使用test属性进行条件判断，如果条件为true，则拼接SQL-->
     <!--resultType：单条记录所封装的类型-->
     <!--将where关键字换成<where>标签，1. 动态生成where关键字, 2. 自动取出多余的and, or-->
-    <select id="list" resultType="com.shawn.pojo.Emp">
+    <select id="list" resultType="com.shawn.pojo.Emplo">
         <!--自闭和-->
         <!--<include>：通过属性refid,指定包含的sql片段-->
         <include refid="commonSelect"/>

@@ -1,7 +1,7 @@
 package com.shawn;
 
-import com.shawn.mapper.EmpMapper;
-import com.shawn.pojo.Emp;
+import com.shawn.mapper.EmploMapper;
+import com.shawn.pojo.Emplo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +18,7 @@ import java.util.List;
 class SpringbootMybatisCrudApplicationTests {
 
     @Autowired
-    private EmpMapper empMapper;
+    private EmploMapper empMapper;
 
     @Test
     public void testDelete() {
@@ -30,7 +30,7 @@ class SpringbootMybatisCrudApplicationTests {
     @Test
     public void testInsert() {
         // 构造员工对象
-        Emp emp = new Emp();
+        Emplo emp = new Emplo();
         emp.setUsername("Tom2");
         emp.setName("Tom2");
         emp.setImage("1.jpg");
@@ -49,7 +49,7 @@ class SpringbootMybatisCrudApplicationTests {
     @Test
     public void testUpdate() {
         // 构造员工对象
-        Emp emp = new Emp();
+        Emplo emp = new Emplo();
         emp.setId(16);
         emp.setUsername("Tom2");
         emp.setName("Tom2");
@@ -67,7 +67,7 @@ class SpringbootMybatisCrudApplicationTests {
     @Test
     public void testUpdate2(){
         // 构造员工对象
-        Emp emp = new Emp();
+        Emplo emp = new Emplo();
         emp.setId(18);
         emp.setUsername("Tom222333");
 //        emp.setName("Tom222");
@@ -80,7 +80,7 @@ class SpringbootMybatisCrudApplicationTests {
 
     @Test
     public void testGetById() {
-        Emp emp = empMapper.getById(15);
+        Emplo emp = empMapper.getById(15);
         System.out.println(emp);
     }
 
@@ -90,12 +90,12 @@ class SpringbootMybatisCrudApplicationTests {
     // 根据条件查询员工
     @Test
     public void testList() {
-        List<Emp> empList = empMapper.list("张", (short) 1, LocalDate.of(2010, 1, 1),
+        List<Emplo> empList = empMapper.list("张", (short) 1, LocalDate.of(2010, 1, 1),
                 LocalDate.of(2020, 1, 1));
-        List<Emp> empList1 = empMapper.list("张", null, null, null);
-        List<Emp> empList2 = empMapper.list("张", (short) 1, null, null);
-        List<Emp> empList3 = empMapper.list(null, (short) 1, null, null);
-        List<Emp> empList4 = empMapper.list(null, null, null, null);
+        List<Emplo> empList1 = empMapper.list("张", null, null, null);
+        List<Emplo> empList2 = empMapper.list("张", (short) 1, null, null);
+        List<Emplo> empList3 = empMapper.list(null, (short) 1, null, null);
+        List<Emplo> empList4 = empMapper.list(null, null, null, null);
 //        System.out.println(empList);
 //        System.out.println(empList1);
 //        System.out.println(empList2);

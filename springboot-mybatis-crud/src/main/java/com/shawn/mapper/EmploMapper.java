@@ -1,13 +1,13 @@
 package com.shawn.mapper;
 
-import com.shawn.pojo.Emp;
+import com.shawn.pojo.Emplo;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
-public interface EmpMapper {
+public interface EmploMapper {
 
     // 根据ID删除数据
     // 如果mapper接口方法形参只有一个普通类型的参数， #{}里面的属性名可以随便写
@@ -36,7 +36,7 @@ public interface EmpMapper {
     @Options(keyProperty = "id", useGeneratedKeys = true)
     @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
             " VALUES (#{username},#{name},#{gender},#{image},#{job},#{entrydate},#{deptId},#{createTime},#{updateTime})")
-    public void insert(Emp emp);
+    public void insert(Emplo emp);
 
     // 更新员工
 //    @Update("update emp set username=#{username},name=#{name},gender=#{gender},image=#{image}," +
@@ -46,7 +46,7 @@ public interface EmpMapper {
     // 方案三：开启mybatis的驼峰命名自动映射开关 --- a_column -----> aColumn
     // 根据ID查询员工
     @Select("select * from emp where id = #{id}")
-    public Emp getById(Integer id);
+    public Emplo getById(Integer id);
 
     // 方案一：给字段其别名，让别名与实体类属性一致
 //    @Select("select id, username, password, name, gender, image, job, entrydate, " +
@@ -80,10 +80,10 @@ public interface EmpMapper {
     // 动态条件查询
     // <if>: 用于判断条件是否成立。使用test属性进行条件判断，如果条件为true，则拼接SQL
     // <where>: where元素只会在子元素有内容的情况下才插入where子句。而且会自动去除子句的开头的AND或OR
-    public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+    public List<Emplo> list(String name, Short gender, LocalDate begin, LocalDate end);
 
     // 动态更新员工
-    void update2(Emp emp);
+    void update2(Emplo emp);
 
     // 批量删除
     void deleteByIds(List<Integer> ids);

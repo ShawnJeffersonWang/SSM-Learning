@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -29,6 +30,7 @@ public interface DeptMapper {
 
     /**
      * 新增部门
+     *
      * @param dept
      */
     @Insert("insert into dept(name, create_time, update_time) values(#{name}, #{createTime}, #{updateTime})")
