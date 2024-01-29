@@ -8,6 +8,8 @@ import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
 import com.aliyuncs.exceptions.ClientException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +24,20 @@ import java.util.UUID;
 @Component
 public class AliOSSUtils {
 
-    String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-    String bucketName = "web-sh-ti";
+    /*
+    硬编码
+    不便维护及管理
+    @Value注解通常用于外部配置的属性注入，具体用法为：@Value("${配置文件中的key}")
+
+    思路都是：配置==>注入
+     */
+//    @Value("${aliyun.oss.endpoint}")
+//    String endpoint;
+//    @Value("${aliyun.oss.bucketName}")
+//    String bucketName;
+
+    @Autowired
+    private AliOSSProperties aliOSSProperties;
 
     /**
      * 实现上传图片到OSS
@@ -31,6 +45,10 @@ public class AliOSSUtils {
      * 所以直接交给容器管理
      */
     public String upload(MultipartFile file) throws IOException, ClientException {
+        // 获取阿里云OSS参数
+        String endpoint = aliOSSProperties.getEndpoint();
+        String bucketName = aliOSSProperties.getBucketName();
+
         // 获取上传的文件的输入流
         EnvironmentVariableCredentialsProvider credentialsProvider =
                 CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
