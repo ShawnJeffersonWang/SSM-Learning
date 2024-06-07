@@ -30,16 +30,16 @@ public class RequestController {
     // 原始方式
     // Controller方法形参中声明HttpServletRequest对象
     // 调用对象的getParameter(参数名)
-//    @RequestMapping("/simpleParam")
-//    public String simpleParam(HttpServletRequest request) {
-//        // 获取请求参数
-//        String name = request.getParameter("name");
-//        String ageStr = request.getParameter("age");
-//
-//        int age = Integer.parseInt(ageStr);
-//        System.out.println(name + ":" + age);
-//        return "OK";
-//    }
+    @RequestMapping("/simpleParam")
+    public String simpleParam(HttpServletRequest request) {
+        // 获取请求参数
+        String name = request.getParameter("name");
+        String ageStr = request.getParameter("age");
+
+        int age = Integer.parseInt(ageStr);
+        System.out.println(name + ":" + age);
+        return "OK";
+    }
 
     // springboot方式
     // 简单参数：参数名与形参变量名相同，定义形参即可接受参数
@@ -54,70 +54,70 @@ public class RequestController {
     // @RequestParam中的required属性默认为true，代表该请求参数必须传递，如果不传递将报错
     // 如果该参数是可选的，可以将required属性设置为false
     // 如果方法形参名称与请求参数名称不匹配，可以使用@RequestParam完成映射
-    @RequestMapping("/simpleParam")
-    public String simpleParam(@RequestParam(name = "name", required = false) String username, Integer age) {
-        System.out.println(username + ":" + age);
-        return "OK";
-    }
-
-    // 2.实体参数
-    // 简单实体对象：请求参数名与形参对象属性名相同，定义POJO接受即可
-    @RequestMapping("/simplePojo")
-    public String simplePojo(User user) {
-        System.out.println(user);
-        return "OK";
-    }
-
-    // 3.复杂参数
-    // 复杂实体对象：请求参数名与形参对象属性名相同，按照对象层次结构关系即可接收嵌套POJO属性参数
-    @RequestMapping("/complexPojo")
-    public String complexPojo(User user) {
-        System.out.println(user);
-        return "OK";
-    }
-
-    // 数组集合参数
-    // 请求参数名与形参数组名称相同且请求参数为多个，定义数组类型即可接受参数
-    @RequestMapping("/arrayParam")
-    public String arrayParam(String[] hobby) {
-        System.out.println(Arrays.toString(hobby));
-        return "OK";
-    }
-
-    // 集合参数
-    // 请求参数名与形参集合名称相同且请求参数为多个，@RequestParam绑定参数关系
-    @RequestMapping("/listParam")
-    public String listParam(@RequestParam List<String> hobby) {
-        System.out.println(hobby);
-        return "OK";
-    }
-
-    // 4.日期时间参数
-    // bug时间格式必须和pattern完全一致
-    @RequestMapping("/dateParam")
-    public String dataParam(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime updateTime) {
-        System.out.println(updateTime);
-        return "OK";
-    }
-
-    // 5. JSON参数：JSON数据键名与形参对象属性名相同，定义POJO类型形参即可接受参数，需要使用@RequestBody标识
-    @RequestMapping("/jsonParam")
-    public String jsonParam(@RequestBody User user) {
-        System.out.println(user);
-        return "OK";
-    }
-
-    // 路径参数：通过请求URL直接传递参数，使用{...}来表示路径参数，需要使用@PathVariable获取路径参数
-    @RequestMapping("/path/{id}")
-    public String pathParam(@PathVariable Integer id) {
-        System.out.println(id);
-        return "OK";
-    }
-
-    // 获取到路径参数，并将其绑定到方法的形参
-    @RequestMapping("/path/{id}/{name}")
-    public String pathParam2(@PathVariable Integer id, @PathVariable String name) {
-        System.out.println(id + ":" + name);
-        return "OK";
-    }
+//    @RequestMapping("/simpleParam")
+//    public String simpleParam(@RequestParam(name = "name", required = false) String username, Integer age) {
+//        System.out.println(username + ":" + age);
+//        return "OK";
+//    }
+//
+//    // 2.实体参数
+//    // 简单实体对象：请求参数名与形参对象属性名相同，定义POJO接受即可
+//    @RequestMapping("/simplePojo")
+//    public String simplePojo(User user) {
+//        System.out.println(user);
+//        return "OK";
+//    }
+//
+//    // 3.复杂参数
+//    // 复杂实体对象：请求参数名与形参对象属性名相同，按照对象层次结构关系即可接收嵌套POJO属性参数
+//    @RequestMapping("/complexPojo")
+//    public String complexPojo(User user) {
+//        System.out.println(user);
+//        return "OK";
+//    }
+//
+//    // 数组集合参数
+//    // 请求参数名与形参数组名称相同且请求参数为多个，定义数组类型即可接受参数
+//    @RequestMapping("/arrayParam")
+//    public String arrayParam(String[] hobby) {
+//        System.out.println(Arrays.toString(hobby));
+//        return "OK";
+//    }
+//
+//    // 集合参数
+//    // 请求参数名与形参集合名称相同且请求参数为多个，@RequestParam绑定参数关系
+//    @RequestMapping("/listParam")
+//    public String listParam(@RequestParam List<String> hobby) {
+//        System.out.println(hobby);
+//        return "OK";
+//    }
+//
+//    // 4.日期时间参数
+//    // bug时间格式必须和pattern完全一致
+//    @RequestMapping("/dateParam")
+//    public String dataParam(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime updateTime) {
+//        System.out.println(updateTime);
+//        return "OK";
+//    }
+//
+//    // 5. JSON参数：JSON数据键名与形参对象属性名相同，定义POJO类型形参即可接受参数，需要使用@RequestBody标识
+//    @RequestMapping("/jsonParam")
+//    public String jsonParam(@RequestBody User user) {
+//        System.out.println(user);
+//        return "OK";
+//    }
+//
+//    // 路径参数：通过请求URL直接传递参数，使用{...}来表示路径参数，需要使用@PathVariable获取路径参数
+//    @RequestMapping("/path/{id}")
+//    public String pathParam(@PathVariable Integer id) {
+//        System.out.println(id);
+//        return "OK";
+//    }
+//
+//    // 获取到路径参数，并将其绑定到方法的形参
+//    @RequestMapping("/path/{id}/{name}")
+//    public String pathParam2(@PathVariable Integer id, @PathVariable String name) {
+//        System.out.println(id + ":" + name);
+//        return "OK";
+//    }
 }
